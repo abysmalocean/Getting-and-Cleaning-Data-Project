@@ -25,3 +25,34 @@ the final data can be found in the "CleanData.txt" file, which can be read in to
 `read.table("CleanData.txt",header =TRUE)`
 The name include `Avcctivity_ID` and `Subject`. 
 in the 5th question, i used `aggregate` to get the clean data
+
+##the result Explan step by step
+- ###in the **first** question:  **Merges the training and the test sets to create one data set.**
+I use `rbind` and `cbind` to combine the data
+result is variable **`Data`**
+
+- ###in the **Second** question:  **Extracts only the measurements on the mean and standard deviation for each measurement.**
+
+`grepl("mean\\(\\)|std\\(\\)",data_Names$V2)` used to extract the mean and std data for the `Data`
+Result saved in  **`result2`**
+
+- ###in the **Third** question:  **Uses descriptive activity names to name the activities in the data set.**
+`actLabels <- read.table(file.path("./data/UCI HAR Dataset", "activity_labels.txt"),header = FALSE)` so the information in `activity_labels.txt` has been saved in `actLabels`
+`Data$Activity_ID <- factor(x = Data$Activity_ID,labels = actLabels$V2)` 
+so the `Data$Activity_ID` in the table has been saved as a **Factor**
+
+- ###in the **Fouth** question:  **Appropriately labels the data set with descriptive variable names.**
+`gsub` function has been use to change the name: 
+- ^t means begain with t change to time_
+- ^f means begain with frequency_
+- Acc change to _Accelerometer
+- Gyro change to _Gyroscope_
+- Mag change to _Magnitude_
+- BodyBody change to _Body_
+
+- ###in the **Fifth** question:  **creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
+`Clean_Data<-aggregate(. ~Subject + Activity_ID, Data, mean)`
+to get the mean and saved to a new data variable `Clean_Data`
+`write.table(Clean_Data, file = "CleanData.txt",row.name=FALSE)`
+save the resutl to **`CleanData.txt`**
+

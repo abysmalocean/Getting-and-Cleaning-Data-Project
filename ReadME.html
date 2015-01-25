@@ -94,6 +94,29 @@ img {
 <h2>the result</h2>
 <p>the final data can be found in the “CleanData.txt” file, which can be read in to R with <code>read.table(&quot;CleanData.txt&quot;,header =TRUE)</code> The name include <code>Avcctivity_ID</code> and <code>Subject</code>. in the 5th question, i used <code>aggregate</code> to get the clean data</p>
 </div>
+<div id="the-result-explan-step-by-step" class="section level2">
+<h2>the result Explan step by step</h2>
+<ul>
+<li><h3>in the <strong>first</strong> question: <strong>Merges the training and the test sets to create one data set.</strong></h3>
+<p>I use <code>rbind</code> and <code>cbind</code> to combine the data result is variable <strong><code>Data</code></strong></p></li>
+<li><h3>in the <strong>Second</strong> question: <strong>Extracts only the measurements on the mean and standard deviation for each measurement.</strong></h3></li>
+</ul>
+<p><code>grepl(&quot;mean\\(\\)|std\\(\\)&quot;,data_Names$V2)</code> used to extract the mean and std data for the <code>Data</code> Result saved in <strong><code>result2</code></strong></p>
+<ul>
+<li><h3>in the <strong>Third</strong> question: <strong>Uses descriptive activity names to name the activities in the data set.</strong></h3>
+<p><code>actLabels &lt;- read.table(file.path(&quot;./data/UCI HAR Dataset&quot;, &quot;activity_labels.txt&quot;),header = FALSE)</code> so the information in <code>activity_labels.txt</code> has been saved in <code>actLabels</code> <code>Data$Activity_ID &lt;- factor(x = Data$Activity_ID,labels = actLabels$V2)</code> so the <code>Data$Activity_ID</code> in the table has been saved as a <strong>Factor</strong></p></li>
+<li><h3>in the <strong>Fouth</strong> question: <strong>Appropriately labels the data set with descriptive variable names.</strong></h3>
+<code>gsub</code> function has been use to change the name:</li>
+<li>^t means begain with t change to time_</li>
+<li>^f means begain with frequency_</li>
+<li>Acc change to _Accelerometer</li>
+<li>Gyro change to <em>Gyroscope</em></li>
+<li>Mag change to <em>Magnitude</em></li>
+<li><p>BodyBody change to <em>Body</em></p></li>
+<li><h3>in the <strong>Fifth</strong> question: <strong>creates a second, independent tidy data set with the average of each variable for each activity and each subject.</strong></h3>
+<p><code>Clean_Data&lt;-aggregate(. ~Subject + Activity_ID, Data, mean)</code> to get the mean and saved to a new data variable <code>Clean_Data</code> <code>write.table(Clean_Data, file = &quot;CleanData.txt&quot;,row.name=FALSE)</code> save the resutl to <strong><code>CleanData.txt</code></strong></p></li>
+</ul>
+</div>
 </div>
 
 
