@@ -1,0 +1,27 @@
+---
+title: "ReadMe"
+author: "LiangXU"
+date: "Sunday, January 25, 2015"
+output: html_document
+---
+
+#**ReadMe for Getting and Cleanning Data Project**
+##Tidied Data from the Human Activity Recognition Using Smartphones Dataset
+
+##Accoring to the question givened by the CoodBook this project have 6 steps
+- 1: Init the question, download the files 
+- 2:Qiestion 1
+- 3:Qiestion 2
+- 4:Qiestion 3
+- 5:Qiestion 4
+- 6:Qiestion 5
+
+##the libraty used in this project are
+- 1.library("plyr")
+- 2.library("knitr")
+
+##the result
+the final data can be found in the "CleanData.txt" file, which can be read in to R with 
+`read.table("CleanData.txt",header =TRUE)`
+The name include `Avcctivity_ID` and `Subject`. 
+in the 5th question, i used `aggregate` to get the clean data
